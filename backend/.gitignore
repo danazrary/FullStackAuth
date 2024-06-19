@@ -1,0 +1,22 @@
+# Dependency directories
+/node_modules
+
+# Environment variables
+.env
+
+# IDE or editor files
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# OS or temporary files
+.DS_Store
+Thumbs.db
+
+# Debug log
+npm-debug.log
+
+# Ignore user-specific npm settings
+.npmrc
