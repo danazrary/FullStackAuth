@@ -6,6 +6,9 @@ import { validationResult, checkSchema } from "express-validator";
 import { comparePassword } from "../utils/helper.js";
 import { User } from "../database/mongoose/user.js";
 
+
+import { Token, RefreshToken } from "../middleware/Jwt+Cookie.js";
+
 const router = Router();
 router.post("/login", checkSchema(loginValidator), async (req, res) => {
   const errors = validationResult(req);
@@ -13,8 +16,8 @@ router.post("/login", checkSchema(loginValidator), async (req, res) => {
     const error = errors.array();
 
     res.status(422).json({
-      token: "null",
-      refreshtoken: "null",
+    //  token: "null",
+     // refreshtoken: "null",
       message: error,
       error: true,
     });
@@ -28,8 +31,8 @@ router.post("/login", checkSchema(loginValidator), async (req, res) => {
 
     if (!findUser) {
       return res.status(422).json({
-        token: "null",
-        refreshtoken: "null",
+      //  token: "null",
+       // refreshtoken: "null",
         message: "user not found",
         error: true,
       });
@@ -38,22 +41,27 @@ router.post("/login", checkSchema(loginValidator), async (req, res) => {
 
     if (!isPasswordMatch) {
       return res.status(422).json({
-        token: "null",
-        refreshtoken: "null",
+      //  token: "null",
+       // refreshtoken: "null",
         message: "password is incorrect",
         error: true,
       });
     }
+     const token = Token(findUser._id, res);
+     const refreshToken = RefreshToken(findUser._id, res);
+
+    
     return res.status(201).json({
-      token: "hi",
-      refreshtoken: "byee",
-      message: "user logged in successfully",
+      token: token,
+     // refreshtoken: "byee",
+     // message: "user logged in successfully",
+      succsess: true,
       error: false,
     });
   } catch (error) {
     res.status(500).json({
-      token: "null",
-      refreshtoken: "null",
+      //token: "null",
+     // refreshtoken: "null",
       message: "we could not create user",
       error: true,
     });

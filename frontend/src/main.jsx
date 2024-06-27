@@ -7,6 +7,7 @@ import Root from './pages/Root.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage ,{action as loginAction} from './pages/LoginPage.jsx'
 import RegisterPage,{action as registerAction} from './pages/RegisterPage.jsx'
+import HomeAPage from './pages/HomeAPage.jsx'
 import './index.css'
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
         action: registerAction,
       },
+      {
+        path: "home",
+        element: <HomeAPage />,
+      }
     ],
   },
 ]);
